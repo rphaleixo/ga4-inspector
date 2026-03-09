@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA4 Inspector — Instalação</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0f18;
+    --card: #13151f;
+    --border: #2a2d3e;
+    --border2: #1e2030;
+    --cyan: #00e5ff;
+    --green: #34d399;
+    --purple: #a78bfa;
+    --text: #e8eaf2;
+    --muted: #8892b0;
+    --dim: #4a5270;
+    --mono: 'Consolas', 'Courier New', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 56px 20px 80px;
+  }
+
+  .hero { text-align: center; max-width: 560px; margin-bottom: 52px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,229,255,.06); border: 1px solid rgba(0,229,255,.2);
+    color: var(--cyan); font-family: var(--mono); font-size: 10px;
+    letter-spacing: 2px; padding: 5px 14px; border-radius: 2px;
+    margin-bottom: 20px; text-transform: uppercase;
+  }
+  .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); animation: blink 1.4s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+  h1 { font-size: 40px; font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin-bottom: 14px; }
+  h1 span { background: linear-gradient(120deg, #fff 0%, var(--cyan) 55%, var(--purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-sub { color: var(--muted); font-size: 14px; line-height: 1.7; font-family: var(--mono); }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 28px 28px;
+    max-width: 620px; width: 100%; margin-bottom: 16px;
+  }
+  .card-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--dim);
+    font-family: var(--mono); margin-bottom: 20px;
+  }
+
+  /* BOOKMARKLET */
+  .bm-center { text-align: center; padding: 4px 0 16px; }
+  .bm-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, #6d28d9, #0891b2);
+    color: #fff; font-family: var(--mono); font-size: 14px; font-weight: 700;
+    padding: 14px 32px; border-radius: 6px; text-decoration: none;
+    cursor: grab; transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 24px rgba(0,229,255,.2); user-select: none;
+    letter-spacing: .5px;
+  }
+  .bm-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(0,229,255,.35); }
+  .bm-hint { font-size: 11px; color: var(--dim); font-family: var(--mono); margin-top: 10px; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 14px; }
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+  .step-n {
+    background: #6d28d9; color: #fff; font-family: var(--mono);
+    font-size: 10px; font-weight: 800; width: 22px; height: 22px;
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; margin-top: 2px;
+  }
+  .step p { font-size: 13px; color: var(--muted); line-height: 1.7; font-family: var(--mono); }
+  .step p strong { color: var(--cyan); }
+
+  /* FEATURES */
+  .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .feat { background: #0d0f18; border: 1px solid var(--border2); border-radius: 6px; padding: 14px; }
+  .feat-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .feat-icon { font-size: 16px; }
+  .feat-name { font-size: 12px; font-weight: 700; color: var(--text); flex: 1; }
+  .feat-new {
+    font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 2px;
+    font-family: var(--mono); background: rgba(52,211,153,.12);
+    color: var(--green); border: 1px solid rgba(52,211,153,.25);
+  }
+  .feat-desc { font-size: 11px; color: var(--dim); line-height: 1.6; font-family: var(--mono); }
+
+  footer { margin-top: 48px; font-size: 11px; color: var(--dim); font-family: var(--mono); text-align: center; }
+  footer a { color: var(--cyan); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge"><div class="pulse"></div>GA4 · Inspector · v3</div>
+  <h1><span>Rastreamento GA4<br>em tempo real.</span></h1>
+  <p class="hero-sub">Captura 100% dos eventos — automáticos, manuais e de rede.<br>Um clique. Nenhum conhecimento técnico necessário.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">// passo 1 — instalar (uma vez só)</div>
+  <div class="bm-center">
+    <a class="bm-btn" id="bm-link" href="#">⚡ GA4 Inspector</a>
+    <p class="bm-hint">Arraste este botão para a barra de favoritos do Chrome</p>
+  </div>
+  <div class="steps" style="margin-top:16px">
+    <div class="step"><div class="step-n">1</div><p>Se a barra de favoritos não aparecer, pressione <strong>Ctrl+Shift+B</strong>.</p></div>
+    <div class="step"><div class="step-n">2</div><p>Arraste o botão <strong>⚡ GA4 Inspector</strong> acima para essa barra e solte.</p></div>
+    <div class="step"><div class="step-n">3</div><p>Pronto. Não precisa fazer mais nada nesta página.</p></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">// passo 2 — usar</div>
+  <div class="steps">
+    <div class="step"><div class="step-n">1</div><p>Abra qualquer site que queira monitorar.</p></div>
+    <div class="step"><div class="step-n">2</div><p>Clique em <strong>⚡ GA4 Inspector</strong> na barra de favoritos.</p></div>
+    <div class="step"><div class="step-n">3</div><p>Um painel aparece sobre a página. Interaja com o site — os eventos aparecem em tempo real.</p></div>
+    <div class="step"><div class="step-n">4</div><p>Clique novamente no favorito para <strong>fechar</strong> o painel.</p></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">// o que o painel entrega</div>
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="feat-top"><span class="feat-icon">📡</span><span class="feat-name">Feed ao vivo</span></div>
+      <div class="feat-desc">Todos os eventos GA4 capturados em tempo real com nome, tipo, status e gatilho.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-top"><span class="feat-icon">🌐</span><span class="feat-name">Interceptação de rede</span><span class="feat-new">v3</span></div>
+      <div class="feat-desc">Captura hits diretamente via XHR e fetch — pega eventos automáticos que outros métodos perdem.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-top"><span class="feat-icon">👤</span><span class="feat-name">Dados de sessão</span><span class="feat-new">v3</span></div>
+      <div class="feat-desc">Client ID, Session ID, Session Count, Engagement Time, Consent Status por evento.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-top"><span class="feat-icon">🔬</span><span class="feat-name">QA automático</span></div>
+      <div class="feat-desc">Detecta parâmetros obrigatórios ausentes, valores inválidos e eventos duplicados.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-top"><span class="feat-icon">⏱</span><span class="feat-name">Timeline</span></div>
+      <div class="feat-desc">Linha do tempo visual dos disparos com tempo decorrido desde o carregamento da página.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-top"><span class="feat-icon">🔎</span><span class="feat-name">Diagnóstico</span></div>
+      <div class="feat-desc">Verifica implementação GA4/GTM, exibe GTM Hash, Measurement ID e dados de consentimento.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  GA4 Inspector v3 · Lance! · <a href="https://github.com" id="gh-link">Ver no GitHub</a>
+</footer>
+
+<script>
+  // Detecta a URL base para carregar o painel remotamente
+  var BASE_URL = (function() {
+    var s = document.currentScript || (function() {
+      var scripts = document.getElementsByTagName('script');
+      return scripts[scripts.length - 1];
+    })();
+    var origin = location.origin + location.pathname.replace(/\/[^\/]*$/, '');
+    return origin;
+  })();
+
+  var bookmarkletCode = '(function(){' +
+    'var s=document.createElement("script");' +
+    's.src="' + BASE_URL + '/ga4-panel.js?v="+Date.now();' +
+    'document.head.appendChild(s);' +
+    '})();';
+
+  document.getElementById('bm-link').href = 'javascript:' + bookmarkletCode;
+  document.getElementById('gh-link').href = location.origin + location.pathname.replace(/\/[^\/]*$/, '');
+</script>
+
+</body>
+</html>
